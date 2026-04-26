@@ -31,4 +31,4 @@
 ![混淆矩阵](https://raw.githubusercontent.com/dengyuxi2006/cervical-cancer-data-analysis/main/images/confusion_matrix.png)
 
 ## 总结
-本项目完成了临床医疗数据的全流程分析实践，包含数据处理、统计建模、可视化展示、报告撰写与项目在线发布，满足课程作业全部要求。
+本项目完成了临床医疗数据的全流程分析实践，包含数据处理、统计建模、可视化展示、报告撰写与项目在线发布。
