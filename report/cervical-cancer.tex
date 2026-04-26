@@ -1,0 +1,90 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{ctex}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{caption}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+\begin{document}
+
+\title{宫颈癌近距离放疗临床数据分析报告}
+\author{数据分析小组}
+\date{\today}
+\maketitle
+
+\section{研究目的}
+以宫颈癌近距离放疗患者临床资料为研究对象，依托Python工具完成数据读取、预处理、描述性统计、可视化分析、二分类预测模型构建与模型评估，探索临床指标与肿瘤预后的关联规律，掌握完整数据分析标准流程。
+
+\section{数据说明}
+本次分析所用数据为宫颈癌患者临床随访数据集，文件格式为Excel，包含患者基线信息、多疗程放疗剂量、临床检验指标、治疗方案及无进展生存结局标签。
+核心变量包括：年龄、病理类型、分化程度、肿瘤分期、分次放疗剂量、平均剂量、SCC指标、同步放化疗标识、PFS生存状态。
+
+\section{数据处理流程}
+\subsection{数据读取}
+调用\texttt{pandas}库读取本地Excel文件，载入原始数据集，查看数据维度与样本基本信息，确认数据读取无误。
+
+\subsection{数据预处理}
+整合全部放疗疗程数据，将\texttt{dose1}至\texttt{dose7}累加计算得到总放疗剂量；
+筛选建模所需核心特征变量，剔除冗余字段；
+对存在缺失值的样本进行清理，得到标准化清洗数据集，用于后续统计与建模分析。
+
+\subsection{统计分析与可视化}
+对连续型与分类临床指标进行描述性统计，计算均值、离散程度与分布范围；
+绘制年龄分布图、肿瘤分期分布图、变量相关性热力图，直观展示数据分布与变量相关性。
+
+\subsection{预测模型构建}
+以患者无进展生存状态\texttt{PFS\_status}为预测目标，其余临床指标为输入特征；
+划分训练集与测试集，采用逻辑回归算法构建预后二分类预测模型，完成模型训练。
+
+\subsection{模型评估}
+通过ROC曲线、AUC值、混淆矩阵对模型分类效果进行综合评估，量化模型的鉴别能力与预测准确度。
+
+\section{可视化结果展示}
+\subsection{人群基线分布}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{age_dist.png}
+    \caption{患者年龄分布}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{stage_dist.png}
+    \caption{肿瘤临床分期分布}
+\end{figure}
+
+\subsection{变量相关性分析}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{corr_heatmap.png}
+    \caption{临床指标相关性热力图}
+\end{figure}
+
+\section{预测模型结果}
+\subsection{ROC曲线分析}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{roc_curve.png}
+    \caption{模型ROC曲线}
+\end{figure}
+
+\subsection{混淆矩阵分析}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{confusion_matrix.png}
+    \caption{模型预测混淆矩阵}
+\end{figure}
+
+\section{分析结论}
+\begin{enumerate}
+\item 通过数据预处理完成放疗剂量整合与缺失值清洗，形成规范可用的临床分析数据集；
+\item 各临床指标分布符合宫颈癌患病人群基线特征，放疗剂量与临床指标存在不同程度相关性；
+\item 基于逻辑回归构建的预后预测模型可实现对PFS结局的有效判别，模型整体表现稳定；
+\item 整套流程实现了从原始数据输入、清洗统计、建模到可视化评估的全流程标准化分析。
+\end{enumerate}
+
+\end{document}
